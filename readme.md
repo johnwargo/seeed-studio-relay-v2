@@ -1,10 +1,8 @@
 # Seeed Studio Relay Board (V2)
 
-> **Note:** V2 implements the relay library as a class; I made this version for someone who wanted to use this library with a stack or relay boards, so I had to have the ability to initialize a specific board (and address) and control each separately. THIS CODE HAS NOT BEEN TESTED. Try it out and let me know what needs to be fixed. :-)
+> **Note:** V2 implements the relay library as a class; I made this version for someone who wanted to use this library with a stack of relay boards, so I had to have the ability to initialize a specific board (and address) and control each separately. THIS CODE HAS NOT BEEN TESTED. Try it out and let me know what needs to be fixed. :-)
 
 I had an idea for a project, a Raspberry Pi-based power controller for my media center. I searched around for relay boards, and discovered the [Seeed Studio Raspberry Pi Relay Board v1.0](https://www.seeedstudio.com/Raspberry-Pi-Relay-Board-v1.0-p-2409.html), so I thought I'd give it a try.
-
-> **Note**: At the time, this was the only directly-mountable relay board I could find for the Raspberry Pi. Since then, I found another one in the [ModMyPi PiOT Relay Board](https://www.modmypi.com/raspberry-pi/breakout-boards/modmypi/modmypi-piot-relay-board). I'll play with that one soon and publish my findings on [wwwjohnwargo.com](http://johnwargo.com); stay tuned.
 
 When I finally got around to playing with the hardware, I used (or should I say tried to use) Seeed Studio's [Wiki Page for the board](http://wiki.seeed.cc/Raspberry_Pi_Relay_Board_v1.0/) to guide my efforts. Unfortunately, I quickly learned that the article was incomplete and didn't have everything I needed to work with the board. I mounted the board on my Raspberry Pi, powered it up, ran their sample test application, and got nowhere. It didn't work.
 
@@ -112,7 +110,7 @@ That's it, that's all there is to it.
 
 ## Update History
 
-02/24/2017 - Added the ability to toggle a specific relay's status using `relay_toggle_port` also added functions for reading data from the relay board (in support of the toggle function).
+06/18/2020 - Created this version.
 
 ***
 
