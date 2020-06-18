@@ -11,9 +11,10 @@
 
 import smbus
 
+# This value should never change since Seeed only makes 4 port boards,
+# but I made it a constructor option anyway
 # The number of relay ports on the relay board.
-# This value should never change since Seed only makes 4 port boards
-NUM_RELAY_PORTS = 4
+# NUM_RELAY_PORTS = 4
 
 # # Change the following value if your Relay board uses a different I2C address.
 # DEVICE_ADDRESS = 0x20  # 7 bit address (will be left shifted to add the read write bit)
@@ -27,8 +28,9 @@ bus = smbus.SMBus(1)  # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)
 class Relay():
     global bus
 
-    def __init__(self, device_address=0x20):
+    def __init__(self, device_address=0x20, num_relays=4):
         self.DEVICE_ADDRESS = device_address
+        self.NUM_RELAY_PORTS = num_relays
         self.DEVICE_REG_MODE1 = 0x06
         self.DEVICE_REG_DATA = 0xff
         bus.write_byte_data(self.DEVICE_ADDRESS, self.DEVICE_REG_MODE1, self.DEVICE_REG_DATA)
@@ -36,7 +38,7 @@ class Relay():
     def relay_on(self, relay_num):
         if isinstance(relay_num, int):
             # do we have a valid relay number?
-            if 0 < relay_num <= NUM_RELAY_PORTS:
+            if 0 < relay_num <= self.NUM_RELAY_PORTS:
                 print('Turning relay {} on'.format(relay_num))
                 self.DEVICE_REG_DATA &= ~(0x1 << (relay_num - 1))
                 bus.write_byte_data(self.DEVICE_ADDRESS, self.DEVICE_REG_MODE1, self.DEVICE_REG_DATA)
@@ -48,7 +50,7 @@ class Relay():
     def relay_off(self, relay_num):
         if isinstance(relay_num, int):
             # do we have a valid relay number?
-            if 0 < relay_num <= NUM_RELAY_PORTS:
+            if 0 < relay_num <= self.NUM_RELAY_PORTS:
                 print('Turning relay {} off'.format(relay_num))
                 self.DEVICE_REG_DATA |= (0x1 << (relay_num - 1))
                 bus.write_byte_data(self.DEVICE_ADDRESS, self.DEVICE_REG_MODE1, self.DEVICE_REG_DATA)
@@ -94,7 +96,7 @@ class Relay():
         # gets the current byte value stored in the relay board
         print('Reading relay status value for relay {}'.format(relay_num))
         # do we have a valid port?
-        if 0 < relay_num <= NUM_RELAY_PORTS:
+        if 0 < relay_num <= self.NUM_RELAY_PORTS:
             # read the memory location
             self.DEVICE_REG_DATA = bus.read_byte_data(self.DEVICE_ADDRESS, self.DEVICE_REG_MODE1)
             # return the specified bit status
