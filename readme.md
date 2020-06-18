@@ -1,4 +1,4 @@
-# Seed Studio Relay Board (V2)
+# Seeed Studio Relay Board (V2)
 
 > **Note:** V2 implements the relay library as a class; I made this version for someone who wanted to use this library with a stack or relay boards, so I had to have the ability to initialize a specific board (and address) and control each separately. THIS CODE HAS NOT BEEN TESTED. Try it out and let me know what needs to be fixed. :-)
 
