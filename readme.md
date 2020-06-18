@@ -110,7 +110,7 @@ That's it, that's all there is to it.
 
 ## Update History
 
-02/24/2017 - Added the ability to toggle a specific relay's status using `relay_toggle_port` also added functions for reading data from the relay board (in support of the toggle function).
+06/18/2020 - Created this version.
 
 ***
 
