@@ -35,7 +35,7 @@ class Relay():
         self.DEVICE_REG_DATA = 0xff
         bus.write_byte_data(self.DEVICE_ADDRESS, self.DEVICE_REG_MODE1, self.DEVICE_REG_DATA)
 
-    def relay_on(self, relay_num):
+    def on(self, relay_num):
         if isinstance(relay_num, int):
             # do we have a valid relay number?
             if 0 < relay_num <= self.NUM_RELAY_PORTS:
@@ -47,7 +47,7 @@ class Relay():
         else:
             print('Relay number must be an Integer value')
 
-    def relay_off(self, relay_num):
+    def off(self, relay_num):
         if isinstance(relay_num, int):
             # do we have a valid relay number?
             if 0 < relay_num <= self.NUM_RELAY_PORTS:
@@ -59,29 +59,29 @@ class Relay():
         else:
             print('Relay number must be an Integer value')
 
-    def relay_all_on(self):
+    def all_on(self):
         print('Turning all relays ON')
         self.DEVICE_REG_DATA &= ~(0xf << 0)
         bus.write_byte_data(self.DEVICE_ADDRESS, self.DEVICE_REG_MODE1, self.DEVICE_REG_DATA)
 
-    def relay_all_off(self):
+    def all_off(self):
         print('Turning all relays OFF')
         self.DEVICE_REG_DATA |= (0xf << 0)
         bus.write_byte_data(self.DEVICE_ADDRESS, self.DEVICE_REG_MODE1, self.DEVICE_REG_DATA)
 
-    def relay_toggle_port(self, relay_num):
+    def toggle_port(self, relay_num):
         print('Toggling relay:', relay_num)
-        if self.relay_get_port_status(relay_num):
+        if self.get_port_status(relay_num):
             # it's on, so turn it off
-            self.relay_off(relay_num)
+            self.off(relay_num)
         else:
             # it's off, so turn it on
-            self.relay_on(relay_num)
+            self.on(relay_num)
 
-    def relay_get_port_status(self, relay_num):
+    def get_port_status(self, relay_num):
         # determines whether the specified port is ON/OFF
         print('Checking status of relay {}'.format(relay_num))
-        res = self.relay_get_port_data(relay_num)
+        res = self.get_port_data(relay_num)
         if res > 0:
             mask = 1 << (relay_num - 1)
             # return the specified bit status
@@ -92,7 +92,7 @@ class Relay():
             print("Specified relay port is invalid")
             return False
 
-    def relay_get_port_data(self, relay_num):
+    def get_port_data(self, relay_num):
         # gets the current byte value stored in the relay board
         print('Reading relay status value for relay {}'.format(relay_num))
         # do we have a valid port?
@@ -105,3 +105,15 @@ class Relay():
             # otherwise (invalid port), always return 0
             print("Specified relay port is invalid")
             return 0
+
+    def print_status(self):
+        output = "| "
+        for x in range(self.NUM_RELAY_PORTS):
+            status = self.get_port_status(x)
+            # print('Port {}: {}'.format(x, status))
+            output += str(x)
+            if status:
+                output += ': On  | '
+            else:
+                output += ': Off | '
+        print('Relay status: {}'.format(output))
