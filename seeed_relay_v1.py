@@ -6,8 +6,7 @@
 # Modified from the sample code on the Seeed Studio Wiki
 # http://wiki.seeed.cc/Raspberry_Pi_Relay_Board_v1.0/
 # =========================================================
-
-# from __future__ import print_function
+# TODO: Implement logging for configurable output
 
 import smbus
 
@@ -15,12 +14,6 @@ import smbus
 # but I made it a constructor option anyway
 # The number of relay ports on the relay board.
 # NUM_RELAY_PORTS = 4
-
-# # Change the following value if your Relay board uses a different I2C address.
-# DEVICE_ADDRESS = 0x20  # 7 bit address (will be left shifted to add the read write bit)
-# # Don't change the values, there's no need for that.
-# DEVICE_REG_MODE1 = 0x06
-# DEVICE_REG_DATA = 0xff
 
 bus = smbus.SMBus(1)  # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)
 
