@@ -34,6 +34,7 @@ def process_loop():
             relay.off(i)
             relay.print_status()
             time.sleep(1)
+        for i in range(1, 5):
             # test the toggle method
             print('Testing the toggle methods')
             relay.toggle_port(i)
@@ -42,7 +43,7 @@ def process_loop():
             relay.toggle_port(i)
             relay.print_status()
             time.sleep(1)
-            print('Repeating loop')
+        print('Repeating loop')
 
 
 # Now see what we're supposed to do next
