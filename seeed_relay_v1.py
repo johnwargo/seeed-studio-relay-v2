@@ -43,7 +43,7 @@ class Relay():
                 self.DEVICE_REG_DATA &= ~(0x1 << (relay_num - 1))
                 bus.write_byte_data(self.DEVICE_ADDRESS, self.DEVICE_REG_MODE1, self.DEVICE_REG_DATA)
             else:
-                print('Invalid relay #:{}'.format(relay_num))
+                print('Invalid relay: #{}'.format(relay_num))
         else:
             print('Relay number must be an Integer value')
 
@@ -55,7 +55,7 @@ class Relay():
                 self.DEVICE_REG_DATA |= (0x1 << (relay_num - 1))
                 bus.write_byte_data(self.DEVICE_ADDRESS, self.DEVICE_REG_MODE1, self.DEVICE_REG_DATA)
             else:
-                print('Invalid relay #:{}'.format(relay_num))
+                print('Invalid relay: #{}'.format(relay_num))
         else:
             print('Relay number must be an Integer value')
 
@@ -89,7 +89,7 @@ class Relay():
             return (self.DEVICE_REG_DATA & mask) == 0
         else:
             # otherwise (invalid port), always return False
-            print("Specified relay port is invalid")
+            print("Relay port ({}) is invalid".format(relay_num))
             return False
 
     def get_port_data(self, relay_num):
@@ -108,7 +108,7 @@ class Relay():
 
     def print_status(self):
         output = "| "
-        for x in range(self.NUM_RELAY_PORTS):
+        for x in range(1, self.NUM_RELAY_PORTS+1):
             status = self.get_port_status(x)
             # print('Port {}: {}'.format(x, status))
             output += str(x)
