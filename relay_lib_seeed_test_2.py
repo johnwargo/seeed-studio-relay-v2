@@ -25,18 +25,18 @@ def process_loop():
 
     # now cycle each relay every second in an infinite loop
     while True:
+        # test the on/off methods
+        print('Testing on/off methods')
         for i in range(1, 5):
-            # test the on/off methods
-            print('Testing on/off methods')
             relay.on(i)
             relay.print_status()
             time.sleep(1)
             relay.off(i)
             relay.print_status()
             time.sleep(1)
+        # test the toggle method
+        print('Testing the toggle methods')
         for i in range(1, 5):
-            # test the toggle method
-            print('Testing the toggle methods')
             relay.toggle_port(i)
             relay.print_status()
             time.sleep(1)
