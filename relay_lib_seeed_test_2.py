@@ -8,7 +8,7 @@
 import sys
 import time
 
-from relay_lib_seeed import Relay
+from seeed_relay_v1 import Relay
 
 
 def process_loop():
@@ -26,11 +26,23 @@ def process_loop():
     # now cycle each relay every second in an infinite loop
     while True:
         for i in range(1, 5):
+            # test the on/off methods
+            print('Testing on/off methods')
             relay.on(i)
             relay.print_status()
             time.sleep(1)
             relay.off(i)
             relay.print_status()
+            time.sleep(1)
+            # test the toggle method
+            print('Testing the toggle methods')
+            relay.toggle_port(i)
+            relay.print_status()
+            time.sleep(1)
+            relay.toggle_port(i)
+            relay.print_status()
+            time.sleep(1)
+            print('Repeating loop')
 
 
 # Now see what we're supposed to do next

@@ -26,7 +26,7 @@ In the repository, you'll find three files:
 To use the module in your own Python applications, copy the module (`relay_lib_seeed.py`) into your project folder, then import the module in your Python application by adding the following line to the beginning of your application:
 
 ```python
-from relay_lib_seeed import Relay
+from seeed_relay_v1 import Relay
 ```
 
 Next, you must initialize the Relay object:

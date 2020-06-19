@@ -8,7 +8,7 @@
 import sys
 import time
 
-from relay_lib_seeed import Relay
+from seeed_relay_v1 import Relay
 
 
 def process_loop():

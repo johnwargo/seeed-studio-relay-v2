@@ -1,6 +1,10 @@
 # from Seeed Studio Wiki
 # http://wiki.seeed.cc/Raspberry_Pi_Relay_Board_v1.0/
 
+# This Seeed's test app, it does NOT use the library. Use this program to
+# test that the relay board is working when you're having trouble with the
+# library
+
 import signal
 import sys
 
