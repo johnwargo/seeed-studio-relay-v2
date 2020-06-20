@@ -14,12 +14,12 @@ from seeed_relay_v1 import Relay
 def process_loop():
     # turn all of the relays on
     relay.all_on()
-    relay.print_status()
+    relay.print_status_all()
     # wait a second
     time.sleep(1)
     # turn all of the relays off
     relay.all_off()
-    relay.print_status()
+    relay.print_status_all()
     # wait a second
     time.sleep(1)
 
@@ -29,20 +29,20 @@ def process_loop():
         print('Testing on/off methods')
         for i in range(1, 5):
             relay.on(i)
-            relay.print_status()
+            relay.print_status_all()
             time.sleep(1)
             relay.off(i)
-            relay.print_status()
+            relay.print_status_all()
             time.sleep(1)
 
         # test the toggle method
         print('Testing the toggle methods')
         for i in range(1, 5):
             relay.toggle_port(i)
-            relay.print_status()
+            relay.print_status_all()
             time.sleep(1)
             relay.toggle_port(i)
-            relay.print_status()
+            relay.print_status_all()
             time.sleep(1)
 
         print('Repeating loop')
