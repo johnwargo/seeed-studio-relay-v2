@@ -39,7 +39,7 @@ This initializes the first board with a default address of `0x20`.  The board de
 
 ![Address Settings](images/dip-settings.png)
 
-If your first board is at a different address or to initialize a second board, use:
+If your first board is at a different address or to initialize an additional board, use:
 
 ```
 relay2 = Relay(0xSOMEOTHERADDRESS)
@@ -50,6 +50,27 @@ where `SOMEOTHERADDRESS` is the address of the board (set using DIP switches on 
 ```python
 relay2 = Relay(0x21)
 ```
+
+This exposes a series of functions to your application, you'll use them invoked through the `relay` object your created earlier:
+
+- `on(relay_num)` - Turns a single relay on. Pass an integer value between `1` and `4` (inclusive) to the function to specify the relay you wish to turn on. For example: `relay.on(1)` will turn the first relay (which is actually relay `0` internally) on.
+- `off(relay_num)` - Turns a single relay on. Pass an integer value between 1 and 4 (inclusive) to the function to specify the relay you wish to turn on. For example: `relay.off(4)` will turn the last relay (which is actually relay `3` internally) off.
+- `all_on()` - Turns all of the relays on simultaneously.    
+- `all_off()` - Turns all of the relays off simultaneously.
+- `toggle_port(relay_num)` - Toggles the status of the specified relay. If it's on, the module will turn it off. If it's off, the module will turn it on. Cool, right?
+- `get_port_status(relay_num)` - Returns a Boolean value indicating the status of the specified relay. `True` if the relay is on, `false` if the relay is off. This function was added to enable the capabilities of the `relay.toggle_port` function described previously.
+- `get_port_data(relay_num)` - Returns an integer value representing the current state of the relay board. This function is used internally by `get_port_status`. The first four bits of the result indicate the status of the board's relays. From right to left, bit 0 represents relay 1, bit 1 represents relay 2, and so on, as shown in the following table. A zero in the bit position indicates that the relay is on.
+- `print_status_all` - Prints the status of all the relays as `Relay status: | 1: Off |  2: Off | 3: Off | 4: Off |`. Debug mode (described below) does not affect the operation of this method.
+- `print_status(relay_num)` - Prints the status of the specified relay  `Relay 1: Off` Debug mode (described below) does not affect the operation of this method.
+
+Bit Values from `relay_get_port_data`
+
+| Relay | Off       | On (binary) | On (Integer) |
+|-------|-----------|-------------|--------------|
+| 1     | 1111 1111 | 1111 1110   | 254          |
+| 2     | 1111 1111 | 1111 1101   | 253          |
+| 3     | 1111 1111 | 1111 1011   | 251          |
+| 4     | 1111 1111 | 1111 0111   | 247          |
 
 You can also enable `debug` mode during initialization:
 
@@ -63,28 +84,7 @@ or
 relay=Relay(0x21, debug=True)
 ```
 
-With `debug` enabled, most relay methods print the action they're performing to the console before performing the action. You would enable this mode when you want the console to print an update to the console any time the relay library does anything.
-
-This exposes a series of functions to your application, you'll use them invoked through the `relay` object your created earlier:
-
-- `on(relay_num)` - Turns a single relay on. Pass an integer value between `1` and `4` (inclusive) to the function to specify the relay you wish to turn on. For example: `relay.on(1)` will turn the first relay (which is actually relay `0` internally) on.
-- `off(relay_num)` - Turns a single relay on. Pass an integer value between 1 and 4 (inclusive) to the function to specify the relay you wish to turn on. For example: `relay.off(4)` will turn the last relay (which is actually relay `3` internally) off.
-- `all_on()` - Turns all of the relays on simultaneously.    
-- `all_off()` - Turns all of the relays off simultaneously.
-- `toggle_port(relay_num)` - Toggles the status of the specified relay. If it's on, the module will turn it off. If it's off, the module will turn it on. Cool, right?
-- `get_port_status(relay_num)` - Returns a Boolean value indicating the status of the specified relay. `True` if the relay is on, `false` if the relay is off. This function was added to enable the capabilities of the `relay.toggle_port` function described previously.
-- `get_port_data(relay_num)` - Returns an integer value representing the current state of the relay board. This function is used internally by `get_port_status`. The first four bits of the result indicate the status of the board's relays. From right to left, bit 0 represents relay 1, bit 1 represents relay 2, and so on, as shown in the following table. A zero in the bit position indicates that the relay is on.
-- `print_status_all` - prints the status of all the relays as `Relay status: | 1: Off |  2: Off | 3: Off | 4: Off |`
-- `print_status(relay_num)` - prints the status of the specified relay  `Relay 1: Off`
-
-Bit Values from `relay_get_port_data`
-
-| Relay | Off       | On (binary) | On (Integer) |
-|-------|-----------|-------------|--------------|
-| 1     | 1111 1111 | 1111 1110   | 254          |
-| 2     | 1111 1111 | 1111 1101   | 253          |
-| 3     | 1111 1111 | 1111 1011   | 251          |
-| 4     | 1111 1111 | 1111 0111   | 247          |
+With `debug` enabled, most relay methods print the action they're performing to the console before performing the action. You would enable this mode when you want the console to print an update to the console any time the relay library does anything. You can see an example of this in action in `relay_lib_seeed_test_1.py` described below. 
 
 The repository includes three test applications:
 
