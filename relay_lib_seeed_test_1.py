@@ -32,7 +32,7 @@ def process_loop():
 # Now see what we're supposed to do next
 if __name__ == "__main__":
     # Create the relay object
-    relay = Relay()
+    relay = Relay(debug=True)
 
     try:
         process_loop()
