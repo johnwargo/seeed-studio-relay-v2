@@ -99,7 +99,7 @@ class Relay():
             print("Specified relay port is invalid")
             return 0
 
-    def print_status(self):
+    def print_status_all(self):
         output = "| "
         for x in range(1, self.NUM_RELAY_PORTS+1):
             status = self.get_port_status(x)
@@ -110,3 +110,12 @@ class Relay():
             else:
                 output += ': Off | '
         print('Relay status: {}'.format(output))
+
+    def print_status(self, relay_num):
+        output = str(relay_num)
+        status = self.get_port_status(relay_num)
+        if status:
+            output += ': On  '
+        else:
+            output += ': Off '
+        print('Relay {}'.format(output))
