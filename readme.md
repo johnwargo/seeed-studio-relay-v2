@@ -51,6 +51,20 @@ where `SOMEOTHERADDRESS` is the address of the board (set using DIP switches on 
 relay2 = Relay(0x21)
 ```
 
+You can also enable `debug` mode during initialization:
+
+```python
+relay = Relay(debug=True)
+```
+
+or
+
+```python
+relay=Relay(0x21, debug=True)
+```
+
+With `debug` enabled, most relay methods print the action they're performing to the console before performing the action. You would enable this mode when you want the console to print an update to the console any time the relay library does anything.
+
 This exposes a series of functions to your application, you'll use them invoked through the `relay` object your created earlier:
 
 - `on(relay_num)` - Turns a single relay on. Pass an integer value between `1` and `4` (inclusive) to the function to specify the relay you wish to turn on. For example: `relay.on(1)` will turn the first relay (which is actually relay `0` internally) on.
