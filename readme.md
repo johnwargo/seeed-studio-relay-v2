@@ -1,6 +1,6 @@
 # Seeed Studio Relay Board (V2)
 
-> **Note:** V2 implements the relay library as a class; I made this version for someone who wanted to use this library with a stack of relay boards, so I had to have the ability to initialize a specific board (and address) and control each separately. THIS CODE HAS NOT BEEN TESTED. Try it out and let me know what needs to be fixed. :-)
+> **Note:** V2 implements the relay library as a class; I made this version for someone who wanted to use this library with a stack of relay boards, so I had to have the ability to initialize a specific board (and address) and control each separately. MEthod names and more changed with this version, so if you upgrade, you're going to have to change your code.
 
 I had an idea for a project, a Raspberry Pi-based power controller for my media center. I searched around for relay boards, and discovered the [Seeed Studio Raspberry Pi Relay Board v1.0](https://www.seeedstudio.com/Raspberry-Pi-Relay-Board-v1.0-p-2409.html), so I thought I'd give it a try.
 
