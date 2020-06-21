@@ -60,8 +60,8 @@ This exposes a series of functions to your application, you'll use them invoked 
 - `toggle_port(relay_num)` - Toggles the status of the specified relay. If it's on, the module will turn it off. If it's off, the module will turn it on. Cool, right?
 - `get_port_status(relay_num)` - Returns a Boolean value indicating the status of the specified relay. `True` if the relay is on, `false` if the relay is off. This function was added to enable the capabilities of the `relay.toggle_port` function described previously.
 - `get_port_data(relay_num)` - Returns an integer value representing the current state of the relay board. This function is used internally by `get_port_status`. The first four bits of the result indicate the status of the board's relays. From right to left, bit 0 represents relay 1, bit 1 represents relay 2, and so on, as shown in the following table. A zero in the bit position indicates that the relay is on.
-- `print_status_all` - Prints the status of all the relays as `Relay status: | 1: Off |  2: Off | 3: Off | 4: Off |`. Debug mode (described below) does not affect the operation of this method.
-- `print_status(relay_num)` - Prints the status of the specified relay  `Relay 1: Off` Debug mode (described below) does not affect the operation of this method.
+- `print_status_all` - Prints the status of all the relays as `Relay status: | 1: Off |  2: Off | 3: Off | 4: Off |`.  Action Output mode (described below) does not affect the operation of this method.
+- `print_status(relay_num)` - Prints the status of the specified relay  `Relay 1: Off`. Action output mode (described below) does not affect the operation of this method.
 
 Bit Values from `relay_get_port_data`
 
@@ -72,19 +72,19 @@ Bit Values from `relay_get_port_data`
 | 3     | 1111 1111 | 1111 1011   | 251          |
 | 4     | 1111 1111 | 1111 0111   | 247          |
 
-You can also enable `debug` mode during initialization:
+You can also enable `action_output` mode during initialization:
 
 ```python
-relay = Relay(debug=True)
+relay = Relay(action_output=True)
 ```
 
 or
 
 ```python
-relay=Relay(0x21, debug=True)
+relay=Relay(0x21, action_output=True)
 ```
 
-With `debug` enabled, most relay methods print the action they're performing to the console before performing the action. You would enable this mode when you want the console to print an update to the console any time the relay library does anything. You can see an example of this in action in `relay_lib_seeed_test_1.py` described below. 
+With `action_output` enabled, most relay methods print the action they're performing to the console before performing the action. You would enable this mode when you want the console to print an update to the console any time the relay library does anything. You can see an example of this in action in `relay_lib_seeed_test_1.py` described below. 
 
 The repository includes three test applications:
 

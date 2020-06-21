@@ -6,7 +6,6 @@
 # Modified from the sample code on the Seeed Studio Wiki
 # http://wiki.seeed.cc/Raspberry_Pi_Relay_Board_v1.0/
 # =========================================================
-# TODO: Implement logging for configurable output
 
 import smbus
 
@@ -22,16 +21,16 @@ class Relay():
 
     global bus
 
-    def __init__(self, device_address=0x20, num_relays=4, enable_debug=False):
+    def __init__(self, device_address=0x20, num_relays=4, action_output=False):
         print('Initializing relay board at {}'.format(device_address))
-        if enable_debug:
-            print('Enabling debug mode')
+        if action_output:
+            print('Enabling action_output mode')
         self.DEVICE_ADDRESS = device_address
         self.NUM_RELAY_PORTS = num_relays
-        self.debug = enable_debug
         self.DEVICE_REG_MODE1 = 0x06
         self.DEVICE_REG_DATA = 0xff
         bus.write_byte_data(self.DEVICE_ADDRESS, self.DEVICE_REG_MODE1, self.DEVICE_REG_DATA)
+        self.debug = action_output
 
     def on(self, relay_num):
         if isinstance(relay_num, int):
